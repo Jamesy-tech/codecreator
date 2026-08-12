@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="prism.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<link rel="icon" href="icon.png">
+  <title>Dashboard | Codecreator</title>
+  
+  <style>
+  
+      @import url('https://fonts.googleapis.com/css2?family=Happy+Monkey&family=Lilita+One&family=Permanent+Marker&family=Silkscreen:wght@400;700&family=VT323&display=swap');
+      
+      
+    .savebutton {
+      width:100px;
+      height:34px;
+    }
+      .close {
+      width:100px;
+      height:34px;
+    }
+    
+    .modal {
+      background:white;
+      border:solid black 1px;
+      margin-bottom:5px;
+      padding-top:5px;
+      padding-bottom:3px;
+      overflow:scroll;
+      outline:none;
+      border-bottom:none;
+      border-right:none;
+      border-top:none;
+      width:100%;
+    }
+    
+    #editor {
+      width:100%;
+      outline:solid black 0px;
+      font-family:monospace;
+      font-size:16px;
+      border:solid black 1px;
+      line-height:20px;
+   
+      background:white;
+     
+      height:81vh;
+      overflow:scroll;
+      transition: box-shadow 0.3s ease;
+}
+
+    #contentDiv {
+      width:100%;
+      outline:solid black 0px;
+      font-family:verdana;
+      background:white;
+      font-size:16px;
+      line-height:20px;
+      border-left:solid dodgerblue 6px ;
+      border-top:none;
+      border-bottom:none;
+      border-right:none;
+      height:45vh;
+      overflow:scroll;
+      transition: box-shadow 0.3s ease;
+}
+
+    #output {
+      width:100%;
+      outline:solid black 0px;
+      font-family:verdana;
+      background:white;
+      margin-top:5px;
+      font-size:16px;
+      line-height:20px;
+      border-left:solid lightgreen 6px ;
+      border-top:none;
+      border-bottom:none;
+      border-right:none;
+      height:30vh;
+      overflow:scroll;
+      transition: box-shadow 0.3s ease;
+}
+
+    #filename {
+      width:100%;
+      outline:solid black 0px;
+    color:black;
+font-family:monospace;
+font-size:24px;
+border:solid black 1px;
+
+height:35px;
+overflow:scroll;
+  transition: box-shadow 0.3s ease;
+}
+
+#editor.shadow {
+  box-shadow: 0 0 15px gray;
+}
+
+iframe {
+  width:99%;
+  margin:auto;
+  border:none;
+}
+    
+   
+     * {
+        font-family:monospace
+     }
+    .modal {
+    
+    }
+    textarea:focus {
+     
+      border-radius:0px;
+  
+    }
+            body {
+            background:white;
+        }
+        canvas {
+            background: white;
+            border: 1px solid #000;
+            cursor:cell;
+        }
+        button {
+            width: 100px;
+            height: 30px;
+            display: inline-block;
+            margin-bottom:8px;
+        }
+        .button2 {
+          height:20px;
+          width:100%;
+          text-align:left;
+          background:transparent;
+          border:solid transparent 4px;
+          
+        }
+        .button2:hover {
+             background:yellow;
+        }
+        .menufile {
+          color:black;
+          text-decoration:none;
+          width:100%;
+        }
+          .menufile:hover {
+          color:black;
+          text-decoration:underline;
+         cursor:pointer;
+          background:yellow;
+         border:none;
+        }
+        .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+position:absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding:6px;
+
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+ /* Defualt Jamesy Creator buttons */
+ 
+.b1 {
+  background:white;
+  border:solid black 1px;
+}
+
+.b8 {
+  background:white;
+  border:solid black 1px;
+}
+
+
+.b1:hover {
+  background:yellow;
+
+}
+
+.b2 {
+ background:deepskyblue;
+ transition:0.3s;
+}
+.b2:hover {
+  background:aquamarine;
+}
+
+/* End JC BTNs*/
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+
+}
+
+.content {
+  height: 100vh; /* Example height, adjust according to your content */
+  padding:16px;
+}
+
+.floating-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height:100px;
+  width: 100%;
+  background-color:ghostwhite; /* Example background color */
+  color: #fff; /* Example text color */
+  padding: 10px;
+  box-shadow: 0px -5px 10px rgba(0, 0, 0, 0.2); /* Example box shadow */
+  overflow:hidden;
+}
+
+#savedList {
+  height:80vh;
+}
+
+#savedList li {
+  list-style-type:none;
+  padding:7px;
+  width:95%;
+
+  padding-left:15px;
+  border-radius:50px;
+  padding-bottom:4px;
+}
+
+#savedList li span, #savedList li img {
+  cursor:default;
+}
+#savedList li:hover {
+ 
+
+}
+#savedList button {
+  margin-left:10px;
+  cursor:pointer;
+}
+#templates {
+  display:none;
+}
+#html, #css, #js  {
+  border-color:blueviolet;
+}
+#doceditor {
+  display:none;
+}
+.new {
+ width:120px;
+          height:30px;
+          cursor:pointer;
+}
+
+.li-icon {
+  background:transparent;
+  width:25px;
+  float:left;
+  display:inline-block;
+  margin-right:10px;
+  
+}
+
+#settingsPopup {
+  padding-left:10px;
+}
+.sign-in {
+  box-shadow:4px 4px black;
+  border:solid black 1px;
+  background:white;
+  padding:4px;
+  width:150px;
+  height:32px;
+  font-size:16px;
+  cursor:pointer;
+  font-family:monospace;
+  transition:0.3s;
+}
+.sign-in:hover {
+   box-shadow:0px 0px black;
+   margin-left:4px;
+   margin-top:4px;
+}
+
+.flex {
+  display:flex;
+}
+.title3 {
+  font-size:32px;
+  font-family:monospace;
+}
+
+
+.sign-in-container {
+  padding:2px;
+  border:solid black 0px;
+  height:48px;
+  width:150px;
+  float:right;
+  margin:15px;
+}
+.title-container {
+  padding:2px;
+  border:solid black 0px;
+  height:48px;
+  width:180px;
+  margin:15px;
+}
+.nav35 {
+  width:100%;
+  height:70px;
+ 
+  border-bottom:solid black 1px;
+}
+
+
+  </style>
+</head>
+<body>
+     
+    <script>
+
+
+ 
+       getLocalStorage()
+     
+       
+        function getLocalStorage() {
+                   const backgroundImage = localStorage.getItem('background2');
+            if (backgroundImage) {
+                document.body.style.backgroundImage = `url(${backgroundImage})`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+                document.body.style.backgroundRepeat = 'no-repeat';
+            }
+
+        }
+      
+ 
+           setTimeout(() => {
+        document.getElementById('colors').style.backgroundImage = "url('colors.png')";
+    }, 3500);
+    
+     
+     
+    
+        
+     </script>
+     
+     <style>
+  .internet {
+  display:none;
+}
+
+#contentDiv {
+  display:none;
+}
+
+.button48 {
+  background:white;
+  border:solid black 1px;
+  border-radius:0px;
+  transition:0.3s;
+  
+}
+.button48:hover {
+ background:whitesmoke;
+  box-shadow:none;
+}
+
+.button49 {
+  background:white;
+  border:solid black 1px;
+  border-radius:0px;
+  transition:0.3s;
+  box-shadow:4px 4px black;
+  
+}
+.button49:hover {
+
+  box-shadow:none;
+}
+#output {
+  display:none;
+}
+.colors-bottom {
+  width:100%;
+  height:18px;
+  background-size:cover;
+  background:url("colors.png");
+  margin-top:3px;
+}
+
+
+   .top-editors {
+        width:100%;
+        background:white;
+        height:70px;
+        display:flex;
+        font-family:monospace;
+      }
+      .top-editors-content {
+        padding:0px;
+        padding-left:20px;
+        padding-right:20px;
+        padding-top:30px;
+        margin:0px;
+        background:transparent;
+        cursor:pointer;
+        font-family:monospace;
+        height:40px;
+        margin-left:10px;
+        margin-right:10px;
+      }
+      .top-editors-content:hover {
+        
+      }
+      .active {
+        background:azure;
+        border-bottom:solid dodgerblue 4px;
+        height:36px;
+        font-family:monospace;
+      }
+      .title {
+        border-right:solid lightgray 1px;
+        padding-right:34px;
+        font-family:monospace;
+      }
+      
+      @media (max-width:800px) {
+        .title {
+          font-size:16px;
+        }
+        
+        .remove {
+          display:none;
+        }
+        
+        .font {
+          font-size:12px;
+        }
+        
+        #search {
+          margin-left:20px;
+        }
+      }
+      
+      @media (min-width:800px) {
+        #search {
+          margin-left:0;
+        }
+      }
+           
+</style>
+
+ <div class="internet" id="internet" style="width:100%;height:20px;text-align:center;padding:20px;color:white;background:tomato;"><k style="color:white; font-family:monospace;">ERROR: No Internet | Some fonts or functions may be unavalible.</k></div>
+ 
+   <div class="nav35">
+    
+    
+    
+    <div class="sign-in-container">
+    <center>
+<a href="index.html"><button class="sign-in">Sign out</button> </a>
+ </center>
+ </div>
+ 
+ <div class="sign-in-container">
+    <center>
+<a href="editor.html"><button class="sign-in">Dashboard</button> </a>
+ </center>
+ </div>
+ 
+ 
+    <div class="flex">
+    <div class="title-container">
+      <span class="title3">codecreator</span>
+    </div>
+    </div>
+ </div>
+ 
+  <div class="colors" id="colors" style="width:100%;height:18px;background-size:cover;background:url('loadingbar.gif');"> </div>
+ 
+     
+     <!-- TopbarEnd -->
+     
+     
+     
+  <div id="doceditor">
+    
+    <div class="content">
+    <!-- Your page content goes here -->
+      <button class="button48" onclick="homePage()" style="width:38px;">&lt;</button>
+      
+   <div class="dropdown">
+  <button class="button48">File</button>
+  <div class="dropdown-content">
+   
+       
+    <a class="menufile" onclick="newDocument()"><button class="button2">New</button></a><br>
+     <a class="menufile" onclick="openFile()"><button class="button2">Open from Files</button></a><br>
+      <a class="menufile"><button onclick="saveContentToList()" id="saveButton" class="button2">Save to codecreator</button></a><br>
+      <a class="menufile" ><button onclick="download()" id="runButton" class="button2">Save to Computer</button></a><br>
+       <a class="menufile" ><button onclick="runFile()" class="button2">Quick run code</button></a><br>
+  
+    <a class="menufile" onclick="homePage()"><button class="button2">Exit Editor</button></a><br>
+    <br>
+  </div>
+</div>
+
+ 
+ &nbsp; <span id="saveValue">Not Saved</span>
+
+    <div  id="templates">
+   
+ 
+<textarea class="modal" id="html" spellcheck="false" title="HTML" style="height:250px;">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+    &lt;link rel="icon" href="yourimage.filetype"&gt;
+    &lt;style&gt;
+      
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    
+    &lt;script&gt;
+      
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</textarea>
+
+<textarea class="modal" id="css" spellcheck="false" title="CSS" style="height:250px;">
+  
+  * {
+  
+
+    }
+
+  body {
+  
+  
+  }
+
+
+
+</textarea>
+<textarea class="modal" id="js" title="JavaScript" spellcheck="false" style="height:250px;">
+  
+function myFunction() {
+  console.log("Function activated!");
+}
+
+</textarea>
+  </div>
+  
+
+
+<div id="settingsPopup" style="display:none;" class="modal">
+  <div class="modal-content">
+   
+
+    <!-- Add your settings options here -->
+  &nbsp;  <label for="fontSize">Font Size:</label>
+<input type="range" id="fontSize" min="12" max="28" step="1" onchange="changeFontSize()">
+<label for="textColor">Text Color:</label>
+<input type="color" id="textColor" onchange="changeTextColor()">
+<label for="lineHeight">Line Height:</label>
+<input type="range" id="lineHeight" min="1" max="4" step="0.1" onchange="changeLineHeight()">
+<label for="theme">Theme:</label>
+<select id="theme" onchange="changeTheme()">
+  <option value="light">Light</option>
+  <option value="dark">Dark</option>
+</select>
+   <label for="font-select">Choose a font:</label>
+    <select id="font-select" onchange="changeFont()">
+            <option value="-" style="font-family:-;">-</option>
+      <option value="Arial" style="font-family:Arial;">Arial</option>
+            <option value="Times New Roman" style="font-family:Times New Roman;">Times New Roman</option>
+            <option value="Courier New" style="font-family:Courier New;">Courier New</option>
+                <option value="Verdana" style="font-family:Verdana;">Verdana</option>
+                                <option value="Georgia" style="font-family:Georgia;">Georgia</option>
+                                   <option value="Garamond" style="font-family:Garamond;">Garamond</option>
+                                   
+                                            <option value="Tahoma" style="font-family:Tahoma;">Tahoma</option>
+                                
+                                
+                                   <option value="Roboto" style="font-family:'Roboto', sans-serif;">Roboto</option>
+                                   <option value="Happy Monkey" style="font-family:'Happy Monkey', sans-serif;">Happy Monkey</option>
+                                           <option value="Silkscreen" style="font-family:'Silkscreen', sans-serif;">Silkscreen</option>
+                                                   <option value="Permanent Marker" style="font-family:'Permanent Marker', sans-serif;">Permanent Marker</option>
+                                                           <option value="Lilita One" style="font-family:'Lilita One', sans-serif;">Lilita One</option>
+                                     <option value="VT323" style="font-family:'VT323', sans-serif;">VT323</option>
+    </select>
+    
+    
+    <label for="shadowCheckbox">Add Box Shadow</label>
+<input type="checkbox" id="shadowCheckbox">
+&nbsp;
+<label for="spellcheck">Spellcheck:</label>
+   <input type="checkbox" class="spellcheck" id="spellcheckToggle">
+
+
+
+  </div>
+</div>
+
+
+
+
+    <textarea spellcheck="false" id="filename" onclick="startFilename()">untitled.txt</textarea>
+  <textarea spellcheck="false" id="editor"></textarea>
+
+ 
+ <div contenteditable id="contentDiv" class=""></div>
+  
+ <div id="output"></div>
+
+
+
+
+  
+  <input type="file" id="fileInput" style="display:none">
+  
+    
+    
+  </div>
+  
+</div>
+  
+  <div id="homePage">
+    <br>
+    &nbsp;&nbsp;&nbsp; <button onclick="newDocument()" class="new button48">New Script</button>  <button onclick="importFile()" class="new button48">Import File</button> &nbsp; <input id="search" placeholder="Search scripts" autocomplete="off">
+<ul id="savedList"></ul>
+  </div>
+    <div class="colors-bottom"> </div>
+        <button style="opacity:0;width:0px;height:0px;" id="autoclick">autoclick</button>
+    
+        <style>
+       #search {
+         padding:5px;
+         border-radius:0px;
+         outline:none;
+         width:260px;
+         height:18px;
+         font-family:monospace;
+         padding-left:10px;
+         border:solid black 1px;
+       }
+     </style>
+     
+  
+<script>
+function importFile() {
+  newDocument()
+  documentEditor()
+  openFile()
+}
+function runFile() {
+    const codeContent = document.getElementById("editor").value;
+    const fileName = document.getElementById("filename").value;
+    const fileExtension = fileName.split('.').pop();
+
+    let blob;
+    switch (fileExtension) {
+        case 'html':
+            blob = new Blob([codeContent], { type: 'text/html' });
+            break;
+        case 'js':
+            blob = new Blob([codeContent], { type: 'text/javascript' });
+            break;
+        case 'css':
+            blob = new Blob([codeContent], { type: 'text/css' });
+            break;
+        case 'txt':
+            blob = new Blob([codeContent], { type: 'text/plain' });
+            break;
+        default:
+            alert("Unsupported file type.");
+            return;
+    }
+
+    const fileURL = URL.createObjectURL(blob);
+    const newTab = window.open(fileURL, '_blank');
+    if (newTab) {
+        newTab.focus();
+        newTab.document.body.requestFullscreen();
+    } else {
+        alert("Unable to open new tab.");
+    }
+}
+
+// Add event listener for input filtering
+document.getElementById('autoclick').addEventListener('click', function() {
+    const input = document.getElementById('search').value;
+    filterList(input);  // Filter the list based on user input
+});
+
+
+
+    
+// Function to get URL search parameters
+function getSearchParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// Function to filter the list based on search input
+function filterList(input) {
+    const listItems = document.querySelectorAll('#savedList li');
+    listItems.forEach(function(item) {
+        if (item.textContent.toLowerCase().includes(input.toLowerCase())) {
+            item.style.display = '';  // Show the item
+        } else {
+            item.style.display = 'none';  // Hide the item
+        }
+    });
+}
+
+// Function to handle filtering on load
+function filterOnLoad() {
+    const searchTerm = getSearchParam('q');
+    
+    if (searchTerm) {
+        const searchInput = document.getElementById('search');
+        searchInput.value = searchTerm;  // Set the search field value
+        filterList(searchTerm);  // Trigger the list filtering
+    }
+}
+
+
+    filterOnLoad();
+
+
+// Add event listener for input filtering
+document.getElementById('search').addEventListener('input', function() {
+    const input = document.getElementById('search').value;
+    filterList(input);  // Filter the list based on user input
+});
+
+
+     document.getElementById("search").focus();
+
+
+ document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById("autoclick").click();
+ });
+
+
+ setTimeout(function() {
+        document.getElementById("autoclick").click();
+    }, 2000);
+
+ setTimeout(function() {
+        document.getElementById("autoclick").click();
+    }, 1000);
+
+
+ setTimeout(function() {
+        document.getElementById("autoclick").click();
+    }, 200);
+    
+  </script>
+  
+  
+  <script>
+  
+  
+ 
+  
+function newJcScript() {
+  window.location.href = "jamspire.html";
+}
+
+// Check for URL parameter and load the script if condition is met
+function checkURLParameter() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('type') === 'jc-code') {
+       window.location.href = "jamspire.html";
+    }
+}
+
+
+checkURLParameter();
+
+ loadSavedItems();
+ 
+ function setupAutoSave() {
+    const autoSaveEnabled = localStorage.getItem("autoSave") === "true";
+    const editor = document.getElementById('editor');
+    const filenameInput = document.getElementById("filename");
+    const saveValueDisplay = document.getElementById("saveValue");
+
+    if (!editor || !filenameInput || !saveValueDisplay) {
+        console.error("Required elements not found in the DOM");
+        return; // Exit if elements are not found
+    }
+
+    editor.addEventListener('input', function() {
+        if (autoSaveEnabled) {
+            if (filenameInput.value === 'untitled.txt') {
+                // Do nothing if the filename is "Untitled Document"
+                return;
+            } else {
+                saveValueDisplay.textContent = "Saving...";
+
+                // Simulate saving delay
+                setTimeout(() => {
+                    saveValueDisplay.textContent = "Saved";
+                    saveContentToList(); // Call the save function
+                }, 2300);
+            }
+        } else {
+            saveValueDisplay.textContent = "Not Saved";
+        }
+    });
+}
+
+
+// Call setupAutoSave to initialize the functionality
+setupAutoSave();
+
+
+
+
+  function newDocument() {
+  documentEditor()
+  document.title = "New Script | Codecreator";
+   document.getElementById("editor").focus();
+  document.getElementById("editor").value = "";
+  document.getElementById("filename").value = "untitled.txt";
+}
+
+document.getElementById('editor').addEventListener('keydown', function(event) {
+    if (event.key === 'Tab') {
+        event.preventDefault(); // Prevent the default tab action
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+
+        // Insert 4 spaces (or a tab character)
+        this.value = this.value.substring(0, start) + '    ' + this.value.substring(end);
+        // Move the cursor after the inserted spaces
+        this.selectionStart = this.selectionEnd = start + 4;
+    }
+});
+   
+   
+          function documentEditor() {
+        document.title = "Script Editor | Codecreator";
+         document.getElementById("homePage").style.display = "none";
+                  document.getElementById("doceditor").style.display = "block";
+                 
+       }
+       
+               
+       function homePage() {
+         document.title = "Dashboard | Codecreator";
+         document.getElementById("homePage").style.display = "block";
+                  document.getElementById("doceditor").style.display = "none";
+       }
+       
+       
+       const titleInput = document.getElementById('filename');
+       
+             function updateTitle() {
+            const inputValue = titleInput.value; // Get the current value of the input
+            document.title = `${inputValue} | Document Editor | Jamesy Creator`;
+        }
+
+
+        titleInput.addEventListener('input', updateTitle);
+
+
+
+       
+    // Save content to localStorage with a name
+function saveContentToList() {
+ 
+    const textArea = document.getElementById('editor');
+    const fileNameInput = document.getElementById('filename');
+    const content = textArea.value.trim();
+    const fileName = fileNameInput.value.trim();
+
+    if (content && fileName) {
+        const savedContents = JSON.parse(localStorage.getItem('textAreaContents')) || [];
+        const timestamp = new Date().toLocaleString();
+ document.getElementById("saveValue").textContent = "Saved"
+        // Check if the fileName already exists
+        const existingIndex = savedContents.findIndex(item => item.fileName === fileName);
+
+        if (existingIndex !== -1) {
+            // If it exists, update the existing item
+            savedContents[existingIndex] = { content, fileName, timestamp };
+        } else {
+            // If it doesn't exist, add a new item
+            savedContents.push({ content, fileName, timestamp });
+        }
+
+        localStorage.setItem('textAreaContents', JSON.stringify(savedContents));
+        loadSavedItems();
+        document.getElementById("saveButton").textContent = "Saved to Scripts";
+
+        setTimeout(() => {
+            document.getElementById("saveButton").textContent = "Save to Scripts";
+        }, 2000);
+
+    } else {
+        document.getElementById("saveButton").textContent = "Error;";
+
+        setTimeout(() => {
+            document.getElementById("saveButton").textContent = "Enter name";
+        }, 800);
+
+        setTimeout(() => {
+            document.getElementById("saveButton").textContent = "Save to Scripts";
+        }, 2000);
+    }
+}
+
+
+// Load saved items to the list
+function loadSavedItems() {
+    const savedList = document.getElementById('savedList');
+    const savedContents = JSON.parse(localStorage.getItem('textAreaContents')) || [];
+    savedList.innerHTML = ''; // Clear current list
+
+    savedContents.forEach((item, index) => {
+        // Create list item with content name
+        const listItem = document.createElement('li');
+        listItem.innerHTML = ` <span class="font" onclick="loadContent(${index})">${item.fileName} </span>&nbsp;&nbsp;&nbsp;
+                              <button class="remove button48" onclick="loadContent(${index})">Edit</button> <button onclick="deleteContent(${index})" class="button48">Delete</button>`;
+        savedList.appendChild(listItem);
+    });
+}
+
+// Load content back into the text area
+function loadContent(index) {
+  
+    const savedContents = JSON.parse(localStorage.getItem('textAreaContents')) || [];
+    const textArea = document.getElementById('editor');
+    const fileNameInput = document.getElementById('filename');
+    textArea.value = savedContents[index].content; // Load the selected content into the text area
+    fileNameInput.value = savedContents[index].fileName; // Load the name back into the input
+    
+    documentEditor()
+}
+
+// Delete content from the list
+function deleteContent(index) {
+    let savedContents = JSON.parse(localStorage.getItem('textAreaContents')) || [];
+    savedContents.splice(index, 1); // Remove the item at the given index
+    localStorage.setItem('textAreaContents', JSON.stringify(savedContents));
+    loadSavedItems(); // Reload the updated list
+}
+
+// Load saved items when the page is loaded
+window.onload = loadSavedItems;
+
+  </script>
+  <script>
+         function changeType() {
+      var select = document.getElementById('type');
+      var selectedValue = select.value;
+      var filename = document.getElementById("filename");
+      
+      if (selectedValue === "txt") {
+        
+       filename.textContent = "untitled.txt";
+
+      } else if (selectedValue === "html") {
+        
+            filename.textContent = "untitled.html";
+            
+  
+
+
+      } else if (selectedValue === "css") {
+        
+            filename.textContent = "untitled.css";
+            
+        
+ 
+
+      }  else if (selectedValue === "javascript") {
+        
+            filename.textContent = "untitled.js";
+            
+
+
+      } else {
+
+
+      
+        
+      }
+    }
+    
+        function changeType2() {
+      var select = document.getElementById('type');
+      var selectedValue = select.value;
+      // Redirect to the selected page
+      window.location.href = "newtext.html?type=" + selectedValue;
+    }
+    
+
+       document.getElementById('x').style.backgroundColor = "white";
+    
+       function templates() {
+      var textElement = document.getElementById('x');
+     
+      if (textElement.style.backgroundColor === "white") {
+        textElement.style.backgroundColor = "lime";
+        document.getElementById("templates").style.display = "block";
+ 
+ }  else if (textElement.style.backgroundColor === "yellow") {
+        textElement.style.backgroundColor = "lime";
+        document.getElementById("templates").style.display = "block";
+ 
+ }   else  {
+            textElement.style.backgroundColor = "white";
+               document.getElementById("templates").style.display = "none";
+      }
+    }
+    
+    
+    //document.getElementById("html").style.display = "block";
+  //  document.getElementById("css").style.display = "block";
+   // document.getElementById("js").style.display = "block";
+    
+  //  function saveContent() {
+  //          // Get the content from the editable div
+    //        const content = document.getElementById('editor').value;
+   //
+  //          // Save the content to localStorage
+     //       localStorage.setItem('contentDivContent', content);
+    //         localStorage.setItem('title', filename);
+   //         document.getElementById("save").textContent = "Saved";
+             
+   //     }
+
+
+      //  function loadContent() {
+     //       // Retrieve the saved content from localStorage
+     ///       const savedContent = localStorage.getItem('contentDivContent');
+         
+    ///        if (savedContent) {
+     ///           document.getElementById('editor').value = savedContent;
+    ////            document.getElementById("load").textContent = "Loaded";
+    ////        }
+     //
+    //
+    ////    }
+        
+       function delayedAction() {
+          document.getElementById("load").textContent = "Load";
+          document.getElementById("cave").textContent = "Save";
+       }
+
+  function closeWindows() {
+    document.getElementById("html").style.display = "none";
+    document.getElementById("x").style.display = "none";
+    document.getElementById("css").style.display = "none";
+    document.getElementById("js").style.display = "none";
+  }
+     const checkbox = document.getElementById('spellcheckToggle');
+        const textArea = document.getElementById('editor');
+
+        checkbox.addEventListener('change', () => {
+            textArea.spellcheck = checkbox.checked;
+        });
+        
+  function startFilename() {
+    document.getElementById("filename").style.color = "black";
+  }
+    function download() {
+    const textToSave = document.getElementById('editor').value;
+    const blob = new Blob([textToSave], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    
+    const filename = document.getElementById('filename').value || 'untitled.txt';
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  }
+  
+    function openFile() {
+      const fileInput = document.getElementById('fileInput');
+      fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const text = e.target.result;
+          document.getElementById('editor').value = text;
+        };
+        reader.readAsText(file);
+      });
+      fileInput.click();
+    }
+    document.getElementById("editor").focus();
+
+function openSettingsPopup() {
+  if (document.getElementById('settingsPopup').style.display === "none") {
+  document.getElementById('settingsPopup').style.display = "block";
+  } else {
+    document.getElementById('settingsPopup').style.display = "none";
+  }
+}
+
+
+function closeSettingsPopup() {
+  document.getElementById('settingsPopup').style.display = "none";
+}
+
+  
+  function changeFontSize() {
+  let fontSize = document.getElementById('fontSize').value;
+  document.getElementById('editor').style.fontSize = fontSize + 'px';
+}
+
+function changeTextColor() {
+  let textColor = document.getElementById('textColor').value;
+  document.getElementById('editor').style.color = textColor;
+}
+
+function changeFontFamily() {
+  let fontFamily = document.getElementById('fontFamily').value;
+  document.getElementById('editor').style.fontFamily = fontFamily;
+}
+
+function changeLineHeight() {
+  let lineHeight = document.getElementById('lineHeight').value;
+  document.getElementById('editor').style.lineHeight = lineHeight;
+}
+
+function changeTheme() {
+  let theme = document.getElementById('theme').value;
+  if (theme === 'dark') {
+    document.body.style.backgroundColor = '#333';
+     document.getElementById("editor").style.backgroundColor = 'black';
+    document.getElementById("editor").color = "white"
+     document.getElementById("editor").style.color = 'white';
+  } else {
+    document.body.style.backgroundColor = '#fff';
+    document.getElementById("editor").style.color = 'black';
+      document.getElementById("editor").style.backgroundColor = 'white';
+      document.body.style.color = 'black';
+  }
+}
+
+   function changeFont() {
+            var fontSelect = document.getElementById("font-select");
+            var selectedFont = fontSelect.options[fontSelect.selectedIndex].value;
+            var editor = document.getElementById("editor");
+            editor.style.fontFamily = selectedFont;
+        }
+        
+        const shadowCheckbox = document.getElementById('shadowCheckbox');
+const textarea = document.getElementById('editor');
+const filename = document.getElementById('filename');
+
+
+shadowCheckbox.addEventListener('change', function() {
+  if (this.checked) {
+     filename.classList.add('shadow');
+     textarea.classList.add('shadow');
+  } else {
+    textarea.classList.remove('shadow');
+    filename.classList.remove('shadow');
+  }
+});
+function updateEditor() {
+  var editorContent = document.getElementById('editor').textContent;
+  var codeElement = document.createElement('code');
+  codeElement.textContent = editorContent;
+  // Apply syntax highlighting
+  Prism.highlightElement(codeElement);
+  // Update the editor with the highlighted code
+  document.getElementById('editor').innerHTML = codeElement.innerHTML;
+}
+
+// Listen for input events on the editor
+document.getElementById('editor').addEventListener('input', updateEditor);
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Function to get URL parameters
+            function getQueryParams() {
+                const params = new URLSearchParams(window.location.search);
+                return Object.fromEntries(params.entries());
+            }
+
+            const queryParams = getQueryParams();
+            const type = queryParams.type;
+
+            if (type === 'html') {
+                document.getElementById("editor").spellcheck = false;
+                document.getElementById('editor').style.fontFamily = 'Courier New, Courier, monospace';
+                document.getElementById("filename").textContent = "untitled.html";
+  
+            } else if (type === 'txt') {
+              
+                       document.getElementById("editor").spellcheck = true;
+                document.getElementById("x").style.display = "none";
+                
+            }  else if (type === 'css') {
+                
+                             document.getElementById("editor").spellcheck = false;
+                document.getElementById('editor').style.fontFamily = 'Courier New, Courier, monospace';
+                document.getElementById("filename").textContent = "untitled.css";
+                
+            }  else if (type === 'js') {
+              
+                             document.getElementById("editor").spellcheck = false;
+                document.getElementById('editor').style.fontFamily = 'Courier New, Courier, monospace';
+                document.getElementById("filename").textContent = "untitled.js";
+
+            }   else if (type === 'lua') {
+              
+                             document.getElementById("editor").spellcheck = false;
+                document.getElementById('editor').style.fontFamily = 'Courier New, Courier, monospace';
+                document.getElementById("filename").textContent = "untitled.lua";
+
+            }
+            
+            
+               else {
+               
+            }
+        });
+     
+  
+  </script>
+</body>
+</html>
